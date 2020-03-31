@@ -1,0 +1,10 @@
+.titulo-formulario-rrc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3rem;
+    color: rgb(74, 143, 207);
+}
+.titulo-rrc,  .descripcion-rrc, .direccion-rrc, .popover-rrc, .opt-anonimo-rcc, .opt-compartir-identidad-rcc, .btn-reportar-rcc{
+    font-family: 'Roboto', sans-serif;
+}
+
+
