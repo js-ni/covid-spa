@@ -10,11 +10,21 @@
     "react-dom": "16.13.1",
     "react-scripts": "3.4.1"
   },
+  "devDependencies": {
+    "customize-cra": "^0.9.1",
+    "eslint-config-prettier": "6.10.1",
+    "eslint-plugin-prettier": "3.1.2",
+    "husky": "4.2.3",
+    "lint-staged": "10.1.1",
+    "prettier": "2.0.2",
+    "react-app-rewired": "^2.1.5"
+  },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
   "browserslist": {
     "production": [
@@ -28,8 +38,14 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "customize-cra": "^0.9.1",
-    "react-app-rewired": "^2.1.5"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
   }
 }
