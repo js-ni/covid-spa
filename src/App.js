@@ -1,11 +1,11 @@
 import React from 'react';
-import RRC_C from './componentes/contenedores/RRC_C';
+import CitizenReportRecordContainer from './components/containers/CitizenReportRecordContainer';
 
 function App() {
   return (
     <div className="App">
       {/* REGISTRO REPORTE CIUDADANO CONTENEDOR */}
-      <RRC_C />
+      <CitizenReportRecordContainer />
     </div>
   );
 }
