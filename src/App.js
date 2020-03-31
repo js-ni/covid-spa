@@ -1,5 +1,6 @@
-import React from 'react';
-import CitizenReportRecordContainer from './components/containers/CitizenReportRecordContainer';
+import React from 'react'
+
+import CitizenReportRecordContainer from './components/containers/CitizenReportRecordContainer'
 
 function App() {
   return (
@@ -7,7 +8,7 @@ function App() {
       {/* REGISTRO REPORTE CIUDADANO CONTENEDOR */}
       <CitizenReportRecordContainer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
