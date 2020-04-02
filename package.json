@@ -15,13 +15,13 @@
     "react-scripts": "3.4.1"
   },
   "devDependencies": {
-    "customize-cra": "^0.9.1",
+    "customize-cra": "0.9.1",
     "eslint-config-prettier": "6.10.1",
     "eslint-plugin-prettier": "3.1.2",
     "husky": "4.2.3",
     "lint-staged": "10.1.1",
     "prettier": "2.0.2",
-    "react-app-rewired": "^2.1.5",
+    "react-app-rewired": "2.1.5",
     "stop-runaway-react-effects": "2.0.0"
   },
   "scripts": {
