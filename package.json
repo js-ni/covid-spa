@@ -21,7 +21,8 @@
     "husky": "4.2.3",
     "lint-staged": "10.1.1",
     "prettier": "2.0.2",
-    "react-app-rewired": "^2.1.5"
+    "react-app-rewired": "^2.1.5",
+    "stop-runaway-react-effects": "2.0.0"
   },
   "scripts": {
     "build": "react-scripts build",
