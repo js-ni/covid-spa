@@ -1,11 +1,13 @@
 import React from 'react'
 import {ThemeProvider, CSSReset} from '@chakra-ui/core'
 
+import Routes from 'routes'
+
 export default function App() {
   return (
     <ThemeProvider>
       <CSSReset />
-      <div>App</div>
+      <Routes />
     </ThemeProvider>
   )
 }
