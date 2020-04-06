@@ -5,6 +5,7 @@ import ErrorBoundary from 'components/ErrorBoundary'
 import ViewError from 'components/ViewError'
 
 const Home = lazy(() => import(`pages/Home`))
+const SignUp = lazy(() => import(`pages/SignUp`))
 
 export default function AppRoutes() {
   return (
@@ -13,6 +14,7 @@ export default function AppRoutes() {
         <Router>
           <Routes>
             <Route element={<Home />} path="/" />
+            <Route element={<SignUp />} path="/signup" />
           </Routes>
         </Router>
       </Suspense>
