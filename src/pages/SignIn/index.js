@@ -8,11 +8,8 @@ import {
   Link,
   Flex,
 } from '@chakra-ui/core'
-import customTheme from './theme'
-
-const customInputStyles = {
-  focusBorderColor: customTheme.colors.violet[500],
-}
+import {number, object, string} from 'yup'
+import {Form} from 'formik'
 
 class SessionForm extends Component {
   constructor(props) {
@@ -45,7 +42,6 @@ class SessionForm extends Component {
                 Correo electrónico / Número Telefonico
               </FormLabel>
               <Input
-                {...customInputStyles}
                 type="email"
                 id="email"
                 onChange={this.handleChange}
@@ -55,11 +51,7 @@ class SessionForm extends Component {
 
             <FormControl>
               <FormLabel htmlFor="password">Contraseña</FormLabel>
-              <Input
-                {...customInputStyles}
-                id="password"
-                placeholder="Ingresar contraseña"
-              />
+              <Input id="password" placeholder="Ingresar contraseña" />
             </FormControl>
             <div>
               <Link>¿Olvidó su contraseña?</Link>
