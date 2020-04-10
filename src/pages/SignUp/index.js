@@ -1,6 +1,7 @@
 import React, {useRef} from 'react'
 import {Field, Form, Formik} from 'formik'
-import {number, object, string} from 'yup'
+import {useNavigate} from 'react-router-dom'
+import {object, string} from 'yup'
 import {
   Button,
   FormControl,
@@ -8,21 +9,41 @@ import {
   FormErrorMessage,
   Input,
 } from '@chakra-ui/core'
+import {useMachine} from '@xstate/react'
+
+import machine from './machine'
+import firebaseErrorToFormik from 'utils/firebaseErrorToFormik'
 
 const validationSchema = object({
   city: string(),
   email: string().email().required(),
-  password: string().min(8).required(),
-  phoneNumber: number().required(),
+  password: string().min(6).required(),
+  phoneNumber: string().required(),
   username: string().required(),
 })
 
 export default function SignUp() {
   const formikRef = useRef(null)
+  const navigate = useNavigate()
+  const [current, send] = useMachine(machine, {
+    actions: {
+      redirectToHome: () => {
+        navigate(`/`)
+      },
+      setFormikErrors: (ctx, event) => {
+        formikRef.current.setErrors(firebaseErrorToFormik(event.data))
+      },
+    },
+  })
+
+  function handleSubmit(values) {
+    send(`SIGN_UP`, values)
+  }
 
   return (
     <Formik
       innerRef={formikRef}
+      onSubmit={handleSubmit}
       validationSchema={validationSchema}
       initialValues={{
         city: ``,
@@ -35,56 +56,56 @@ export default function SignUp() {
       {() => (
         <Form>
           <Field name="username">
-            {({field, meta}) => (
-              <FormControl isInvalid={meta.error && meta.touched}>
-                <FormLabel htmlFor="username">Nombre usuario</FormLabel>
+            {({field, meta: {error, touched}}) => (
+              <FormControl isInvalid={error && touched}>
+                <FormLabel htmlFor="username">Nombre de usuario</FormLabel>
                 <Input {...field} id="username" />
-                <FormErrorMessage>{meta.error}</FormErrorMessage>
+                <FormErrorMessage>{error}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
 
           <Field name="email">
-            {({field, meta}) => (
-              <FormControl isInvalid={meta.error && meta.touched} mt={4}>
+            {({field, meta: {error, touched}}) => (
+              <FormControl isInvalid={error && touched} mt={4}>
                 <FormLabel htmlFor="email">Correo electrónico</FormLabel>
                 <Input {...field} id="email" />
-                <FormErrorMessage>{meta.error}</FormErrorMessage>
+                <FormErrorMessage>{error}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
 
           <Field name="phoneNumber">
-            {({field, meta}) => (
-              <FormControl isInvalid={meta.error && meta.touched} mt={4}>
+            {({field, meta: {error, touched}}) => (
+              <FormControl isInvalid={error && touched} mt={4}>
                 <FormLabel htmlFor="phoneNumber">Número de teléfono</FormLabel>
                 <Input {...field} id="phoneNumber" />
-                <FormErrorMessage>{meta.error}</FormErrorMessage>
+                <FormErrorMessage>{error}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
 
           <Field name="city">
-            {({field, meta}) => (
-              <FormControl isInvalid={meta.error && meta.touched} mt={4}>
+            {({field, meta: {error, touched}}) => (
+              <FormControl isInvalid={error && touched} mt={4}>
                 <FormLabel htmlFor="city">Ciudad</FormLabel>
                 <Input {...field} id="city" />
-                <FormErrorMessage>{meta.error}</FormErrorMessage>
+                <FormErrorMessage>{error}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
 
           <Field name="password">
-            {({field, meta}) => (
-              <FormControl isInvalid={meta.error && meta.touched} mt={4}>
+            {({field, meta: {error, touched}}) => (
+              <FormControl isInvalid={error && touched} mt={4}>
                 <FormLabel htmlFor="password">Contraseña</FormLabel>
-                <Input {...field} id="password" />
-                <FormErrorMessage>{meta.error}</FormErrorMessage>
+                <Input {...field} id="password" type="password" />
+                <FormErrorMessage>{error}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
 
-          <Button mt={4} type="submit">
+          <Button isLoading={current.matches(`signingUp`)} mt={4} type="submit">
             Registrarte
           </Button>
         </Form>

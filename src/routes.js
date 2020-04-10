@@ -14,7 +14,7 @@ export default function AppRoutes() {
         <Router>
           <Routes>
             <Route element={<Home />} path="/" />
-            <Route element={<SignUp />} path="/signup" />
+            <Route element={<SignUp />} path="signup" />
           </Routes>
         </Router>
       </Suspense>
