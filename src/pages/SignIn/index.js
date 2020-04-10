@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {useRef} from 'react'
 import {
   FormControl,
   FormLabel,
@@ -8,63 +8,71 @@ import {
   Link,
   Flex,
 } from '@chakra-ui/core'
-import {number, object, string} from 'yup'
-import {Form} from 'formik'
+import {object, string} from 'yup'
+import {Formik, Form, Field} from 'formik'
 
-class SessionForm extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      email: '',
-      phoneNumber: '',
-      password: '',
-    }
+const validationSchema = object({
+  email: string().required(),
+  phone_number: string().required(),
+  password: string().min(6).required(),
+})
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+function SessionForm() {
+  const formikRef = useRef(null)
+
+  function handleSubmit() {
+    console.log('submit')
   }
 
-  handleChange() {
-    console.log('change')
-  }
+  return (
+    <>
+      <Flex justify="center">
+        <Formik
+          innerRef={formikRef}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}
+          initialValues={{
+            email: '',
+            phone_number: '',
+            password: '',
+          }}
+        >
+          {() => (
+            <Form>
+              <Field name="indentificator">
+                {({field, meta: {error, touched}}) => (
+                  <FormControl isInvalid={error & touched} mt={4}>
+                    <FormLabel htmlFor="identificator">
+                      Correo electrónico
+                    </FormLabel>
+                    <Input id="identificator" {...field} />
+                    <FormErrorMessage> {error} </FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
 
-  handleSubmit() {
-    console.log('Submit')
-  }
+              <Field name="password">
+                {({field, meta: {error, touched}}) => (
+                  <FormControl isInvalid={error & touched} mt={4}>
+                    <FormLabel htmlFor="password">Contraseña</FormLabel>
+                    <Input {...field} id="password" />
+                    <FormErrorMessage> {error} </FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+              <div>
+                <Link>¿Olvidó su contraseña?</Link>
+              </div>
 
-  render() {
-    return (
-      <>
-        <Flex justify="center">
-          <form onSubmit={this.handleSubmit}>
-            <FormControl isRequired>
-              <FormLabel htmlFor="email">
-                Correo electrónico / Número Telefonico
-              </FormLabel>
-              <Input
-                type="email"
-                id="email"
-                onChange={this.handleChange}
-                placeholder="Ingresar correo electrónico o número telefónico"
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel htmlFor="password">Contraseña</FormLabel>
-              <Input id="password" placeholder="Ingresar contraseña" />
-            </FormControl>
-            <div>
-              <Link>¿Olvidó su contraseña?</Link>
-            </div>
-
-            <Button type="submit" variant="outline" size="sm">
-              Login
-            </Button>
-          </form>
-        </Flex>
-      </>
-    )
-  }
+              <Button type="submit" variant="outline" mt={4}>
+                Ingresar
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </Flex>
+    </>
+  )
 }
 
 export default SessionForm
