@@ -5,6 +5,8 @@ import ErrorBoundary from 'components/ErrorBoundary'
 import ViewError from 'components/ViewError'
 import SessionForm from 'pages/SignIn'
 
+import Root from 'pages/Root'
+
 const Home = lazy(() => import(`pages/Home`))
 
 export default function AppRoutes() {
@@ -13,8 +15,10 @@ export default function AppRoutes() {
       <Suspense fallback={null}>
         <Router>
           <Routes>
-            <Route element={<Home />} path="/" />
-            <Route element={<SessionForm />} path="/login" />
+            <Route element={<Root />} path="/*">
+              <Route element={<Home />} path="/" />
+              <Route element={<SessionForm />} path="/login" />
+            </Route>
           </Routes>
         </Router>
       </Suspense>
