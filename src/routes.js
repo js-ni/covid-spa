@@ -3,11 +3,12 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 import ErrorBoundary from 'components/ErrorBoundary'
 import ViewError from 'components/ViewError'
-import SessionForm from 'pages/SignIn'
 
 import Root from 'pages/Root'
 
 const Home = lazy(() => import(`pages/Home`))
+const SignIn = lazy(() => import(`pages/SignIn`))
+const SignUp = lazy(() => import(`pages/SignUp`))
 
 export default function AppRoutes() {
   return (
@@ -17,7 +18,8 @@ export default function AppRoutes() {
           <Routes>
             <Route element={<Root />} path="/*">
               <Route element={<Home />} path="/" />
-              <Route element={<SessionForm />} path="/login" />
+              <Route element={<SignIn />} path="/login" />
+              <Route element={<SignUp />} path="signup" />
             </Route>
           </Routes>
         </Router>
