@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 import ErrorBoundary from 'components/ErrorBoundary'
 import ViewError from 'components/ViewError'
+import SessionForm from 'pages/SignIn'
 
 import Root from 'pages/Root'
 
@@ -16,6 +17,7 @@ export default function AppRoutes() {
           <Routes>
             <Route element={<Root />} path="/*">
               <Route element={<Home />} path="/" />
+              <Route element={<SessionForm />} path="/login" />
             </Route>
           </Routes>
         </Router>
