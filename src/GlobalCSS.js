@@ -6,8 +6,6 @@ export default function GlobalCSS() {
     <Global
       styles={css`
         html {
-          font-family: 'Raleway', sans-serif;
-
           background-color: #17132d;
         }
       `}
